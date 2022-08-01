@@ -1,0 +1,15 @@
+body {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+canvas {
+  width: 500px;
+  height: 500px;
+  border: 2px solid black;
+}
+h2 {
+  color: #999999;
+}
