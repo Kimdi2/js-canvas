@@ -2,6 +2,7 @@ const canvas = document.querySelector("canvas");
 // ctx = context
 const ctx = canvas.getContext("2d");
 const lineWidth = document.getElementById("line-width");
+const fontSize = document.getElementById("font-size");
 const color = document.getElementById("color");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
@@ -19,6 +20,7 @@ const CANVAS_HEIGHT = 800;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
+ctx.font = `${fontSize.value}px sans-serif`;
 ctx.lineCap = "round";
 
 let isPainting = false;
@@ -44,6 +46,9 @@ function finishPainting() {
 function onLineWidthChange(event) {
   ctx.lineWidth = event.target.value;
 }
+function onFontSizeChange(event) {
+  ctx.font = `${event.target.value}px sans-serif`;
+}
 
 function onColorChange(event) {
   ctx.strokeStyle = event.target.value;
@@ -60,10 +65,10 @@ function onColorClick(event) {
 function onModeClick() {
   if (isFilling) {
     isFilling = false;
-    modeBtn.innerText = "Fill";
+    modeBtn.innerText = "🎨 Fill";
   } else {
     isFilling = true;
-    modeBtn.innerText = "Draw";
+    modeBtn.innerText = "🖌 Draw";
   }
 }
 
@@ -101,7 +106,6 @@ function onDoubleClick(event) {
   if (text !== "") {
     ctx.save();
     ctx.lineWidth = 1;
-    ctx.font = "48px snas-serif";
     ctx.fillText(text, event.offsetX, event.offsetY);
     ctx.restore();
   }
@@ -123,6 +127,7 @@ canvas.addEventListener("click", onCanvasClick);
 canvas.addEventListener("dblclick", onDoubleClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
+fontSize.addEventListener("change", onFontSizeChange);
 color.addEventListener("change", onColorChange);
 
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
